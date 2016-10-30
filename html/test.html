@@ -1,0 +1,585 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在线直播_在线视频教育课程_智慧树在线教育</title>
+    <meta content="在线视频课程,在线视频教育,在线直播课程" name="keywords" />
+    <meta content="智慧树是全球知名的学分课程服务平台，在线教育平台拥有海量大学高品质课程，网络教育在线完美支持跨校授课，学分认证，名师名课名校，在线互动教育学堂，体验VIP级课程学习，让你成为学堂中的MVP。" name="description" />
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="stylesheet" href="css/video1.css">
+    <link rel="stylesheet" href="css/public.css">
+
+    <script src="scripts/common/jquery-1.8.3.min.js" type="text/javascript"></script>
+
+    <!-- nanoScroller 滚动条样式-->
+    <!-- 	<script src="scripts/common/scrollbar.js" type="text/javascript"></script> -->
+    <script src="scripts/common/jquery.nanoscroller.js"></script>
+    <!--  点播回放播放页面 js -->
+    <script type="text/javascript" src="scripts/video/vod_room/vod_barrage_ques.js?v=1.1"></script>
+    <script type="text/javascript" src="scripts/video/vod_room/Map.js"></script>
+    <!-- 	<script type="text/javascript" src="scripts/video/vod_room/process.js"></script> -->
+    <script type="text/javascript" src="scripts/video/vod_room/vod_room.js?v=1.0"></script>
+    <script type="text/javascript" src="scripts/video/vod_room/watchRecord.js"></script>
+    <!-- 项目自用的弹出框 -->
+    <script src="scripts/common/dialog/tm_dialog2.1.js" type="text/javascript"></script>
+    <script src="scripts/common/dialog/tm_common.js" type="text/javascript"></script>
+    <!-- 点播播放器的 -->
+    <!-- 	<script src="http://lc.zhihuishu.com/cdn/livedotplayer/2.0/ableplayer-2.0-beta.js" type="text/javascript"></script> -->
+    <!-- 新版点播播放器 -->
+    <script type="text/javascript" charset="utf-8" src="http://yuntv.letv.com/player/vod/bcloud.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://lc.zhihuishu.com/ableVideoPlayer/css/videoPlayer.min.css"/>
+    <script src="http://lc.zhihuishu.com/ableVideoPlayer/js/videoPlayer.min.js"></script>
+    <!-- xss 过滤器 -->
+    <script src="scripts/common/xss-filters.1.2.7.min.js" type="text/javascript"></script>
+</head>
+<body id="mybody">
+<div id="header">
+    <!-- <div class="layout"> -->
+    <a href="http://www.zhihuishu.com" class="logo" target="_blank"></a>
+
+    <div class="video_title" id="wh_live_name">
+        <div class="xitongtishi">距离本节课结束还有十五分钟~~</div>
+    </div>
+
+    <div class="header_right">
+        <ul>
+            <li><a href="http://lc.zhihuishu.com" class="zhibo" target="_blank">直播频道</a></li>
+            <li>
+                <a href="javascript:void(0)" class="useImg disNo">
+                    <img id="userImg" src="http://image.zhihuishu.com/testzhs/able-commons/demo/201509/eeb53a3d5a85418c92103202248c6dfa_s3.png" alt="">
+                </a>
+                <a href="javascript:void(0)" class="toLogin disNo"  onclick="login()">登录</a>
+            </li>
+        </ul>
+        <div class="use_setting">
+            <a href="http://user.zhihuishu.com/index.action" class="use_img" title="账号管理">
+                <img src="http://image.zhihuishu.com/testzhs/able-commons/demo/201509/eeb53a3d5a85418c92103202248c6dfa_s3.png" alt="" id="accountImg">
+            </a>
+            <span class="use_name"></span>
+            <a href="http://message.zhihuishu.com/msgcenter" title="消息中心" class="xiaoxi_center" target="_blank"></a>
+
+            <ul class="use_nav">
+                <li>
+                    <a href="http://online.zhihuishu.com/onlineSchool/" class="onlineSchool" target="_blank">在线学堂</a>
+                </li>
+                <li>
+                    <a href="http://user.zhihuishu.com/index.action" class="serverCenter">账号管理</a>
+                </li>
+                <li>
+                    <a href="http://online.zhihuishu.com/onlineSchool/web2/pages/all-guidance/helpcenter.jsp" class="accountManagement" target="_blank">服务中心</a>
+                </li>
+            </ul>
+            <a href="http://user.zhihuishu.com/logout.do" class="tuichuLogin">退出</a>
+        </div>
+    </div>
+    <!-- </div> -->
+</div>
+<div id="main">
+    <div class="playNote_list">
+        <span class="note_listTitle">时间(分)</span>
+        <div class="watchTimes">
+            观看次数<span class="note_list_guanbi"></span>
+        </div>
+        <div id="playnoteList_con" class="nano">
+            <div class="nano-content">
+                <ul class="detail">
+                    <!-- <li>
+                        <div class="time_point">00:01:00</div>
+                        <div class="times_progress">
+                            <div class="times_progressBar"style="width:240px;"></div>
+                        </div>
+                        <div class="times">10+</div>
+                    </li>
+                    <li>
+                        <div class="time_point">00:01:00</div>
+                        <div class="times_progress">
+                            <div class="times_progressBar"style="width:120px;"></div>
+                        </div>
+                        <div class="times">5</div>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="video_con" id='forFollowBackDiv'>
+        <div id="ablePlayerContent" class="live-radio-play-wrap">
+
+        </div>
+    </div>
+    <div class="sider_list" style="right:0px;">
+
+        <div class="sMenu_video"></div>
+        <div class="playnote">
+            <span class="nota_title">播放记录</span>
+            <span class="note_detail">详情</span>
+            <span class="note_tishi">重复播放不记录进签到进度</span>
+            <div class="note_tableCon">
+                <span class="nota_tabTitle">开始时间</span>
+                <span class="nota_tabTitle">结束时间</span>
+                <span class="nota_tabTitle_r">观看与否</span>
+                <div class="note_table_conW nano">
+                    <div class="nano-content">
+                        <ul class="note_tab">
+                            <!-- 								<li> -->
+                            <!-- 									<span class="nota_tabTime">00:01:00</span> -->
+                            <!-- 									<span class="nota_tabTime">00:02:00</span> -->
+                            <!-- 									<span class="nota_tabTime_r watched"></span> -->
+                            <!-- 								</li> -->
+                            <!-- 								<li> -->
+                            <!-- 									<span class="nota_tabTime">00:01:00</span> -->
+                            <!-- 									<span class="nota_tabTime">00:02:00</span> -->
+                            <!-- 									<span class="nota_tabTime_r unwatched"></span> -->
+                            <!-- 								</li> -->
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="video_list">
+            <ul id="videoList">
+                <!-- 					<li class="videomenu current_player"> -->
+                <!-- 						<a class="videoimgCon" href=""><img src="img/1.png" alt=""></a> -->
+                <!-- 						<div class="video_inf"> -->
+                <!-- 							<h3 class="video_name">手工艺制品的创作</h3> -->
+                <!-- 							<h3 class="video_teacher">主讲人:迪卡普.里奥</h3> -->
+                <!-- 							<h3 class="video_time">时长:54分钟</h3> -->
+                <!-- 						</div> -->
+                <!-- 						<div class="videoCurrent"> -->
+                <!-- 							<span>65%</span> -->
+
+                <!-- 							<img src="img/videoCurrentimg.gif" alt="" class="curVideo"> -->
+                <!-- 						</div> -->
+                <!-- 						<div class="player_progress" id="player_progress"></div> -->
+                <!-- 					</li> -->
+            </ul>
+        </div>
+        <div class="danmuInput">
+            <div class="danmu_input_btnWrap">
+                <span class="faceBtn" id="faceControlBtn"></span>
+                <span class="danmu_tishi gray-txt"></span>
+                <div class="face-main disNo">
+                    <ul id="emotionUL">
+                        <li id="[呲牙]" title="呲牙/cy"></li><li id="[可爱]" title="可爱/ka"></li><li id="[发怒]" title="发怒/fn"></li><li id="[擦汗]" title="擦汗/ch"></li><li id="[坏笑]" title="坏笑/huaix"></li><li id="[惊恐]" title="惊恐/jk"></li><li id="[流泪]" title="流泪/ll"></li><li id="[偷笑]" title="偷笑/tx"></li><li id="[调皮]" title="调皮/tp"></li><li id="[咒骂]" title="咒骂/zhm"></li><li id="[委屈]" title="委屈/wq"></li>
+                        <li id="[晕]" title="晕/yun"></li><li id="[抓狂]" title="抓狂/zk"></li><li id="[色]" title="色/se"></li><li id="[鄙视]" title="鄙视/bs"></li><li id="[闭嘴]" title="闭嘴/bz"></li><li id="[发呆]" title="发呆/fd"></li><li id="[困]" title="困/kun"></li><li id="[抠鼻]" title="抠鼻/kb"></li><li id="[阴险]" title="阴险/yx"></li><li id="[吐]" title="吐/tuu"></li><li id="[奋斗]" title="奋斗/fendou"></li>
+                        <li id="[惊讶]" title="惊讶/jy"></li><li id="[流汗]" title="流汗/lh"></li><li id="[疑问]" title="疑问/yiw"></li><li id="[嘘]" title="嘘/xu"></li><li id="[冷汗]" title="冷汗/lengh"></li><li id="[鼓掌]" title="鼓掌/gz"></li><li id="[哈欠]" title="哈欠/hq"></li><li id="[憨笑]" title="憨笑/hanx"></li><li id="[得意]" title="得意/dy"></li><li id="[亲亲]" title="亲亲/qq"></li><li id="[睡]" title="睡/shui"></li>
+                        <li id="[右哼哼]" title="右哼哼/yhh"></li><li id="[左哼哼]" title="左哼哼/zhh"></li><li id="[折磨]" title="折磨/zhem"></li><li id="[快哭了]" title="快哭了/kk"></li><li id="[可怜]" title="可怜/kel"></li><li id="[糗大了]" title="糗大了/qd"></li><li id="[傲慢]" title="傲慢/am"></li><li id="[吓]" title="吓/xia"></li><li id="[酷]" title="酷/kuk"></li><li id="[大兵]" title="大兵/db"></li><li id="[饥饿]" title="饥饿/jie"></li>
+                        <li id="[衰]" title="衰/shuai"></li><li id="[骷髅]" title="骷髅/kl"></li><li id="[强]" title="强/qiang"></li><li id="[弱]" title="弱/ruo"></li><li id="[敲打]" title="敲打/qiao"></li><li id="[心碎]" title="心碎/xs"></li><li id="[握手]" title="握手/ws"></li><li id="[胜利]" title="胜利/shl"></li><li id="[差劲]" title="差劲/cj"></li><li id="[NO]" title="NO/bu"></li><li id="[拳头]" title="拳头/qt"></li>
+                        <li id="[菜刀]" title="菜刀/cd"></li><li id="[炸弹]" title="炸弹/zhd"></li><li id="[便便]" title="便便/bb"></li><li id="[篮球]" title="篮球/lq"></li><li id="[足球]" title="足球/zq"></li><li id="[闪电]" title="闪电/shd"></li><li id="[猪头]" title="猪头/zt"></li><li id="[乒乓]" title="乒乓/pp"></li>
+                    </ul>
+                </div>
+            </div>
+            <textarea name="danmu" id="send_msg_text" placeholder="请使用文明用语哦~" onkeyup="isBlank(event)"></textarea>
+            <a href="javascript:;" id="danmu_sendBtn" class="send-chat-btn">发送</a>
+        </div>
+
+    </div>
+</div>
+<div id="container">
+    <div class="con_navWrap">
+        <div class="container_nav">
+            <ul class="conNav_left">
+                <li class="wenda_li">
+                    问答<span class="wenda_num" id="question_list_allnum">0</span>
+                </li>
+
+                <li id="toAsk">
+                    我要提问
+                </li>
+            </ul>
+            <div class="qiandao disNo qiandao_progress">
+                <!-- <div class="progressCon">
+                    <div class="progressBar sign-state-pct">
+                        0<span class="font_10">%</span><span class="finish_tishi">&nbsp;&nbsp;签到已完成</span>
+                    </div>
+                    <a class="progressMark" title="签到达标"></a>
+                </div> -->
+                <div class="progressCon">
+                    <div class="progressBar sign-state-pct">
+                        <img src="img/wancheng.png" alt="" class="qiandao_wancheng disNo">
+                        <span class="finish_tishi disNo">签到已完成</span>0%
+                    </div>
+                    <a class="progressMark" title="签到达标"></a>
+                    <span class="progressMark_num" title="签到达标">80%</span>
+                </div>
+
+                <div id="qiandao_rule">
+                    <img src="img/qiandao_ruleBg.png" alt="">
+                    <div class="ruleCon">
+                        <h2 class="rulez">签到规则</h2>
+                        <h3>怎么上见面课？</h3>
+                        <p>见面课的上课方式分为两种：现场参加见面课和网上观看见面课直播与回放。同学们在上课前必须明确自己上见面课的方式，如不清楚可找学校老师咨询，不按学校要求的方式上见面课没有分数哦！</p>
+                        <h3>如何在线签到？</h3>
+                        <p>1，学生可以在电脑或APP上观看直播或回放，签到进度<span class="color_mark">达到或超过80%</span>时系统自动完成签到。</p>
+                        <p>2，观看直播未完成签到的，可在回放中续看，继续累计签到进度直到完成签到。</p>
+                        <p>3，未观看直播的，通过回放<span class="color_mark">达到或超过80%</span>，则签到自动完成。</p>
+                        <h3>如何现场签到？</h3>
+                        <p>学生去教室现场上课，根据老师的要求进行现场签到。</p>
+                    </div>
+                </div>
+            </div>
+            <ul class="conNav_right">
+                <li class="dianzan" id="dianzan"><span class="zan_number"></span></li>
+                <li class="tucao" id="tucao"></li>
+            </ul>
+        </div>
+    </div>
+    <div class="layout">
+        <div class="toTop"></div>
+
+        <div class="quesAnsCon question-list-wrap">
+            <div class="wenda_title disNo"></div>
+
+            <!-- 优质提问区 -->
+            <div id="goodQuestion">
+
+            </div>
+            <!-- 普通提问区 -->
+            <div id="commonQuestion">
+
+            </div>
+        </div>
+        <div class="tiwen">
+            <span>提问</span>
+            <div class="guanbi"></div>
+            <div class="tiwenTxt">
+                <textarea name="" id="question_area" class="tiwen_textarea" placeholder="有什么不清楚的及时跟老师提问哦~这样的学习效率是最高的！" maxlength="200"></textarea>
+                <span class="limitworld">最多不超过200字</span>
+            </div>
+            <span class="tiwen_tishi" id="ques_tips_id"></span>
+            <a href="javascript:;" class="tiwenBtn question-oper-btn">提 交</a>
+        </div>
+
+        <div class="tucao_dialog disNo"  id="tucao_dialog">
+            <span class="tucao_title">我要吐槽</span>
+            <div class="tucao_guanbi"></div>
+            <ul>
+                <li class="tucao_li">无法观看</li>
+                <li class="tucao_li">画面卡顿</li>
+                <li class="margin_r0 tucao_li">画面不清晰</li>
+                <li class="tucao_li">声音太轻</li>
+                <li class="tucao_li">声音不清晰</li>
+            </ul>
+            <div class="tucaoTxt">
+                <textarea name="" maxlength="200" class="tucao_textarea" placeholder="如果有什么其他视频播放方面的问题可以在这里给我们反馈哦~"></textarea>
+                <span class="limitworld">最多不超过200字</span>
+            </div>
+            <a href="javascript:;" class="tucaoBtn" id="tucaoBtn">提 交</a>
+        </div>
+
+    </div>
+</div>
+<div id="footer"></div>
+<!-- 内容管理模态框 -->
+<div class="income_table" style="display: none;height: 360px;overflow: auto;">
+    <div class="scroll_div" style="height: 500px">
+        <!-- 公告区 -->
+        <!--
+        <div id="div_notice">
+            <div class="clearfix" id="div_notice_area">
+                <div class="">
+                     <textarea class="notice_area_textare" id="area_notice" rows="5" cols="30"></textarea>
+                </div>
+                <div class="noticeWrap clearfix">
+                    <label><input type="checkbox" checked="checked" value="1" />弹幕公告</label>
+                    <label><input type="checkbox" checked="checked" value="2"/>提问公告</label>
+                    <span class="sendNoticeButton fr" onclick="sendNotice()">发布公告</span>
+                </div>
+             </div>
+        </div>
+          -->
+        <br />
+        <!-- 内容区 -->
+        <div id="div_content">
+            <div class="ml10 clearfix">
+                <div class="contentWrap fl">
+                    <span class="fl">姓名：</span>
+                    <input name="username" type="text" style="color:#999;"
+                           value="提问者姓名" onfocus="if(value=='提问者姓名') {value='';}this.style.color='#000';" onblur="if (value=='') {value='提问者姓名';this.style.color='#999';}" />
+                </div>
+                <div class="contentWrap fl">
+                    <span class="fl">内容：</span>
+                    <input name="question" type="text" style="color:#999;"
+                           value="提问内容" onfocus="if(value=='提问内容') {value='';}this.style.color='#000';" onblur="if (value=='') {value='提问内容';this.style.color='#999';}" />
+                </div>
+                <span class="sendNoticeButton fr" id="content_search_btn">搜索</span>
+            </div>
+            <div class="noticeDetailsTable_wrap">
+                <table id="table_content" border="0" cellspacing="0" cellpadding="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th class="w100">姓名</th>
+                        <th class="w300">内容</th>
+                        <th class="w100">类型</th>
+                        <th class="w160 border_r_none">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--
+                        <tr>
+                          <td class="w100">1</td>
+                          <td class="w300">00111</td>
+                          <td class="w160"><span class="bannedButtton mr15">禁言</span><span class="dleteButton">删除</span></td>
+                        </tr>
+                    -->
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        //引入底部footer.html
+        $("#footer").load("http://lc.zhihuishu.com/live/scripts/menu/footer.html",function(){
+            /* 至顶部 */
+            $(".bottom-btn-scrtop").click(function(){
+                $('body,html').animate({scrollTop: 0},800);return false;
+            });
+        });
+    })
+    //动态设置播放器宽高
+    var winResize = function(){
+        $("#main")[0].style.height = (document.body.offsetHeight-120)+"px";
+        $(".video_con")[0].style.width = (document.body.offsetWidth)-(parseInt($(".sider_list")[0].style.right)+300)+"px";
+        $(".video_list")[0].style.height=(document.body.offsetHeight-120-110)+"px";
+    };
+    window.onresize = winResize;
+    winResize();
+
+    //控制右侧模块显示与收起
+    var onOff=0;
+    var menuVideo=$(".sMenu_video")[0];
+
+    var video=$(".video_list")[0];
+
+    var siderList=$(".sider_list");
+
+
+    menuVideo.onclick=function(){
+        if(onOff==0){
+            /*siderList.animate({right:"0px"},200);*/
+            siderList[0].style.right="-300px";
+            onOff=1;
+        }else{
+            /*siderList.animate({right:"-282px"},200);*/
+            siderList[0].style.right="0px";
+            onOff=0;
+        }
+        winResize();
+    };
+
+    $(".toTop").click(function(){
+        $('body,html').animate({scrollTop:0},1000);
+        return false;
+    });
+
+    $(".conNav_left li")[0].onclick=function(){
+        $('body,html').animate({scrollTop:pageH+60},1000);
+        return false;
+    }
+
+
+    //底部滚动到顶后，底部导航悬浮
+    var danmuCon=$(".video_con")[0];
+    var node = $(".video_con")[0];
+    var pageH=danmuCon.offsetHeight;
+
+
+    //提问弹出与关闭
+    var toAsk=$("#toAsk")[0];
+    var guanbi=$(".guanbi")[0];
+    var tiwenCon=$(".tiwen")[0];
+    guanbi.onclick=function(){
+        tiwenCon.style.display="none";
+    }
+    toAsk.onclick=function(){
+        if(tiwenCon.style.display=="block")
+            tiwenCon.style.display="none";
+        else{
+            changeQuestionBtnStyle(false);
+            tiwenCon.style.display="block";
+        }
+    }
+    /*吐槽选中*/
+    var tucaoLis=$(".tucao_li");
+
+    for(var i=0;i<tucaoLis.length;i++){
+        tucaoLis[i].onoff=1;
+        tucaoLis[i].onclick=function(){
+            if(this.onoff%2==1){
+                this.style.backgroundImage="url(img/tucao_li_xuanzhong.png)";
+                this.style.backgroundRepeat="no-repeat";
+                this.onoff++;
+                this.setAttribute("value",1);
+            }else{
+                this.style.backgroundImage="url(img/tucao_li_weixuanzhong.png)";
+                this.style.backgroundRepeat="no-repeat";
+                this.onoff++;
+                this.removeAttribute("value");
+            }
+        }
+    }
+    function MaxMe(o) {
+        if (window.navigator.userAgent.indexOf("Firefox") > -1) {
+            o.style.height = o.scrollTop + o.scrollHeight + "px";
+        }
+        else {
+            if (o.scrollTop > 0) o.style.height = o.scrollTop + o.scrollHeight + "px";
+        }
+    }
+
+    var main=$("#main");
+    var danmubtn_timer;
+    var danmubtn_timer_onoff=0;
+
+    $(".sMenu_video").hover(function(){
+        danmubtn_timer_onoff=1;
+    },function(){
+        danmubtn_timer_onoff=0;
+    });
+    main.mousemove(function(){
+        $(".sMenu_video").css({opacity:1});
+        clearTimeout(danmubtn_timer);
+        if(danmubtn_timer_onoff==0){
+            danmubtn_timer=window.setTimeout(function(){
+                $(".sMenu_video").animate({opacity:0.3},600);
+            },3000)
+        }
+    });
+
+
+
+    var dianzan=$(".dianzan")[0];
+    /* dianzan.onclick=function(){
+     if(zan_Onoff==0){
+     this.style.backgroundImage="url(img/zan.png)";
+     this.style.backgroundRepeat="no-repeat";
+     zan_Onoff=1;
+     }else{
+     this.style.backgroundImage="url(img/weizan.png)";
+     this.style.backgroundRepeat="no-repeat";
+     zan_Onoff=0;
+     }
+     } */
+    function isBlank(event){
+        var content=$("#send_msg_text").val();
+        if(event.keyCode!=13){
+            if(content.length>0){
+                $(".gray-txt").html("");
+            }else{
+                $(".gray-txt").html("内容不能为空");
+            }
+        }
+    }
+    /*控制个人信息与设置的显示与隐藏*/
+    var useSet_timer;
+    $(".useImg").on("mouseenter",function(event){
+        clearTimeout(useSet_timer);
+        $(".use_setting").fadeIn(500);
+
+    });
+    $(".useImg").on("mouseleave",function(event){
+        useSet_timer=window.setTimeout("$('.use_setting').fadeOut(500)",500);
+    });
+    $(".use_setting").on("mouseenter",function(){
+        clearTimeout(useSet_timer);
+        $(".use_setting").fadeIn(500);
+    });
+    $(".use_setting").on("mouseleave",function(){
+        useSet_timer=window.setTimeout("$('.use_setting').fadeOut(500)",500);
+    });
+
+    /* 滚动条 */
+    $(".nano").nanoScroller();
+    $(".nano").nanoScroller({ preventPageScrolling: true });
+
+
+    /* 播放记录 */
+    /* var videoCurrent=$(".videoCurrent");
+     var playNote=$(".playnote");
+     var timer;
+     var eventTop;
+     videoCurrent.on("mouseenter",function(event){
+     clearTimeout(timer);
+     playNote.hide();
+     playNote.show();
+     if($(window).scrollTop()<=60){
+     eventTop=(event.clientY-event.offsetY-60+$(window).scrollTop());
+     }else{
+     eventTop=(event.clientY-event.offsetY-60+$(window).scrollTop());
+     }
+     playNote[0].style.top=eventTop+"px";
+     $(".nano").nanoScroller();
+     });
+     videoCurrent.on("mouseleave",function(event){
+     timer=window.setTimeout("playNote.hide()",500);
+     });
+     playNote.on("mouseenter",function(event){
+     clearTimeout(timer);
+     playNote.show();
+     $(".nano").nanoScroller();
+     });
+     playNote.on("mouseleave",function(event){
+     timer=window.setTimeout("playNote.hide()",1000);
+     });
+
+     var noteDetailOnoff=$(".note_detail");
+     var playnoteListCon=$(".playNote_list");
+     noteDetailOnoff.on("click",function(event){
+     clearTimeout(timer);
+     playNote.hide();
+     playnoteListCon.show();
+     $(".nano").nanoScroller();
+     });
+     var noteListGUanbi=$(".note_list_guanbi");
+     noteListGUanbi.on("click",function(event){
+     playnoteListCon.hide();
+     $(".nano").nanoScroller();
+     }); */
+    function login(){
+        $.tmDialog.html({content:"<div id='test_div' style=' left: 50%;margin-left: -250px;position: absolute;z-index: 50;'><iframe src='http://user.zhihuishu.com/user/toCommonPage.do?url=" + window.location.href + "' height='399' width='500' frameborder='0' scrolling='no'></iframe></div>",title:"登录",showBtn:false,manyOverlay:true,width:500,height:360,offsetTop:0
+        });
+    }
+
+    // 		var bob_tishi=$(".xitongtishi")[0];
+    var bob_left=0;
+    var bob_time=null;
+    tishi_cishu=0;
+    var noticeIndex=0;
+    var nextShow=null;
+    function bobMove(playTimes,taktTime,loop){
+        clearTimeout(bob_time);
+        bob_left-=2;
+        if(bob_left<=-1200){
+            clearTimeout(bob_time);
+            if(loop!=1)
+                tishi_cishu++;
+            bob_left=0;
+            noticeIndex++;
+            if(noticeIndex>=noticeArr.length)
+                noticeIndex=0;
+            addNotice(noticeArr[noticeIndex]);
+            if(tishi_cishu==playTimes){
+                tishi_cishu=0
+                clearTimeout(bob_time);
+                clearTimeout(nextShow);
+                return;
+            }
+            nextShow=setTimeout(function(){
+                bobMove(playTimes,taktTime,loop);
+            },taktTime);
+            return;
+        }
+        $(".xitongtishi")[0].style.left=800+bob_left+"px";
+        bob_time=window.setTimeout(function(){
+            bobMove(playTimes,taktTime,loop);
+        },10);
+    }
+    // 		bobMove(2);
+</script>
